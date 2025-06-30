@@ -1,0 +1,43 @@
+# Conversion functions
+def celsius_to_fahrenheit(c):
+    return (c * 9/5) + 32
+
+def kilometers_to_miles(km):
+    return km * 0.621371
+
+def kilograms_to_pounds(kg):
+    return kg * 2.20462
+
+# Conversion dictionary
+conversions = {
+    "1": {"name": "Celsius to Fahrenheit", "function": celsius_to_fahrenheit, "from_unit": "°C", "to_unit": "°F"},
+    "2": {"name": "Kilometers to Miles", "function": kilometers_to_miles, "from_unit": "km", "to_unit": "miles"},
+    "3": {"name": "Kilograms to Pounds", "function": kilograms_to_pounds, "from_unit": "kg", "to_unit": "lbs"},
+}
+
+def display_menu():
+    print("\n--- Unit Converter ---")
+    for key, val in conversions.items():
+        print(f"{key}. {val['name']}")
+    print("4. Exit")
+
+def main():
+    while True:
+        display_menu()
+        choice = input("Choose an option (1-4): ")
+
+        if choice == "4":
+            print("Exiting Unit Converter. Goodbye!")
+            break
+        elif choice in conversions:
+            try:
+                value = float(input(f"Enter value in {conversions[choice]['from_unit']}: "))
+                result = conversions[choice]["function"](value)
+                print(f"{value} {conversions[choice]['from_unit']} = {result:.2f} {conversions[choice]['to_unit']}")
+            except ValueError:
+                print("Invalid input. Please enter a numeric value.")
+        else:
+            print("Invalid option. Please select from the menu.")
+
+if __name__ == "__main__":
+    main()
